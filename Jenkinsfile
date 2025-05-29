@@ -14,5 +14,11 @@ pipeline {
 		   checkout scm
 	       }
            }
-      }
+      	   stage('build with Maven') {
+	       steps {
+		    echo 'Building JAR with MAVEN ....'
+		    sh 'mvn clean package'	
+	       }
+	   }
+     }
 }
