@@ -31,7 +31,7 @@ pipeline {
 		   echo " pushing docker image to docker hub"
 		   withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
 		   	sh """
-			echo "$PASS | docker login -u "$USER" --password-stdin
+			echo "$PASS" | docker login -u "$USER" --password-stdin
 			docker push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
 			"""
 		  }
