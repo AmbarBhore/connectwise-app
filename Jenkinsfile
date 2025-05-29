@@ -3,7 +3,7 @@ pipeline {
       environment {
      	  IMAGE_NAME = "rmm-agent"
           IMAGE_TAG = "3.1"
-          DOCKER_REPO = "ambarbhore1234@gmail.com"
+          DOCKER_REPO = "ambarbhore"
           K8S_DEPLOYMENT = "k8/s"
       }	
 
@@ -20,11 +20,11 @@ pipeline {
 		    sh 'mvn clean package'	
 	       }
 	   }
-	  stage('Build docker image') {
+	   stage('Build docker image') {
 	      steps {
 		   echo "Building docker image ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
 		   sh "docker build -t ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
 	      }
-	  } 
+	   } 
      }
 }
