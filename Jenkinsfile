@@ -20,5 +20,11 @@ pipeline {
 		    sh 'mvn clean package'	
 	       }
 	   }
+	  stage('Build docker image') {
+	      steps {
+		   echo "Building docker image ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+		   sh "docker build -t ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
+	     }
+	  } 
      }
 }
