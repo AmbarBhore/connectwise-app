@@ -3,7 +3,7 @@ pipeline {
       environment {
      	  IMAGE_NAME = "rmm-agent"
           IMAGE_TAG = "3.1"
-          DOCKER_REPO = "ambarbhore"
+          DOCKER_REPO = "ambarbhore1234"
           K8S_DEPLOYMENT = "k8/s"
       }	
 
