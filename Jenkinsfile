@@ -37,5 +37,15 @@ pipeline {
 		  }
 	      }
 	   } 
+	   stage('Deploy to kubernetes') {
+	       steps {
+		   echo "Deploying appplication to the kubernetes"
+		   withKubeConfig([credentialsId: 'k8s-jenkins-kubeconfig']) {
+		   sh '''
+		   kubectl apply -f k8s/deployment.yaml
+                   kubectl apply -f k8s/service.yaml
+		   kubectl rollout status deployment/rmm-agent
+	       }
+	   }
      }
 }
