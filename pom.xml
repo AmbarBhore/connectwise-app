@@ -9,7 +9,7 @@
 			        <groupId>org.springframework.boot</groupId>
 				        <artifactId>spring-boot-starter-parent</artifactId>
 					        <version>2.7.18</version>
-						        <relativePath/>
+						        <relativePath />
 							    </parent>
 
 							        <groupId>com.example</groupId>
@@ -33,7 +33,15 @@
 																								            <plugin>
 																										                    <groupId>org.springframework.boot</groupId>
 																												                    <artifactId>spring-boot-maven-plugin</artifactId>
-																														                </plugin>
-																																        </plugins>
-																																	    </build>
-																																    </project>
+																														                    <executions>
+																																	                        <execution>
+																																					                        <goals>
+																																									                            <goal>repackage</goal>
+																																												                            </goals>
+																																															                        </execution>
+																																																		                </executions>
+																																																				            </plugin>
+																																																					            </plugins>
+																																																						        </build>
+
+																																																						</project>
