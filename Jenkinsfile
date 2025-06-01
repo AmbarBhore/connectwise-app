@@ -44,7 +44,7 @@ pipeline {
 		   	echo "Deploying appplication to the kubernetes"
 		        sh 'kubectl apply -f k8s/deployment.yaml'
                         sh 'kubectl apply -f k8s/service.yaml'
-			sh 'kubectl rollout restart deployment rmm-agent' rmm-agent'
+			sh 'kubectl rollout restart deployment rmm-agent'
 		        sh 'kubectl rollout status deployment/rmm-agent'
 	       }
 	   }
