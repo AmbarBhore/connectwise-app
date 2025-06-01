@@ -5,6 +5,7 @@ pipeline {
           IMAGE_TAG = "3.1"
           DOCKER_REPO = "ambarbhore1234"
           K8S_DEPLOYMENT = "k8/s"
+	  KUBECONFIG = credentials('k8s-jenkins-kubeconfig')
       }	
 
       stages {
@@ -39,13 +40,11 @@ pipeline {
 	   } 
 	   stage('Deploy to kubernetes') {
 	       steps {
-		   echo "Deploying appplication to the kubernetes"
-		   withKubeConfig([credentialsId: 'k8s-jenkins-kubeconfig']) {
-		   sh '''
-		   kubectl apply -f k8s/deployment.yaml
-                   kubectl apply -f k8s/service.yaml
-		   kubectl rollout status deployment/rmm-agent
-		   '''
+		   script {
+		   	echo "Deploying appplication to the kubernetes"
+		        sh kubectl apply -f k8s/deployment.yaml
+                        sh kubectl apply -f k8s/service.yaml
+		        sh kubectl rollout status deployment/rmm-agent
 	       }
 	   }
      }
