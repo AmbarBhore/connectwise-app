@@ -21,6 +21,16 @@ pipeline {
 		    sh 'mvn clean package'	
 	       }
 	   }
+	   stage('Verify jar output') {
+	       steps {
+		     echo "list all JARs in target directory"
+		     sh 'ls -lh target/*.jar'
+			
+		    echo "checking for Main-Class in manifest"
+		    sh 'unzip -p target/rmm-agent-3.1.jar META-INF/MANIFEST.MF | grep Main-Class || true'
+	      
+	      }
+	   }
 	   stage('Build docker image') {
 	      steps {
 		   echo "Building docker image ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
