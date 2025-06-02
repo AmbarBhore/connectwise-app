@@ -52,9 +52,9 @@ pipeline {
 	       steps {
 		   script {
 		   	echo "Deploying appplication to the kubernetes"
-			sh 'kubectl delete deployment rmm-agent'
 		        sh 'kubectl apply -f k8s/deployment.yaml'
                         sh 'kubectl apply -f k8s/service.yaml'
+			sh "kubectl set image deployment/rmm-agent rmm-agent=${DOCKER_REPO}/{IMAGE_NAME}:${IMAGE_TAG}"
 			sh 'kubectl rollout restart deployment rmm-agent'
 		        sh 'kubectl rollout status deployment/rmm-agent'
 	       }
