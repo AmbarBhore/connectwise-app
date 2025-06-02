@@ -2,7 +2,7 @@ pipeline {
       agent any
       environment {
      	  IMAGE_NAME = "rmm-agent"
-          IMAGE_TAG = "3.1"
+          IMAGE_TAG = "${BUILD_NUMBER}"
           DOCKER_REPO = "ambarbhore1234"
           K8S_DEPLOYMENT = "k8/s"
 	  KUBECONFIG = credentials('k8s-jenkins-kubeconfig')
