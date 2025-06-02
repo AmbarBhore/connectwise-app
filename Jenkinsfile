@@ -51,11 +51,24 @@ pipeline {
 	   stage('Deploy to kubernetes') {
 	       steps {
 		   script {
-		   	echo "Deploying appplication to the kubernetes"
-		        sh 'kubectl apply -f k8s/deployment.yaml'
-                        sh 'kubectl apply -f k8s/service.yaml'
-			sh "kubectl set image deployment/rmm-agent rmm-agent=${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
-		        sh 'kubectl rollout status deployment/rmm-agent'
+		   	echo "Determining taget environment"
+				
+			def ns = ''
+			if (env.BRANCH_NAME.startsWith("feature/") {
+				ns = 'stagging'
+			} 
+			else if (env.BRANCH_NAME == "main") {
+				ns = 'default'
+			}
+			else {
+				error("unknown branch: cannot determine namespace")
+			}
+			echo "Target namespace : ${ns}"
+			
+		        sh 'kubectl apply -n ${ns} -f k8s/deployment.yaml'
+                        sh 'kubectl apply -n ${ns} -f k8s/service.yaml'
+			sh "kubectl set image -n ${ns} deployment/rmm-agent rmm-agent=${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+		        sh 'kubectl rollout status -n ${ns} deployment/rmm-agent'
 	       }
 	   }
      }
