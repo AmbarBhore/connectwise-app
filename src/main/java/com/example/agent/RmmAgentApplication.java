@@ -21,4 +21,8 @@ public class RmmAgentApplication {
 		        public String info() {
 				        return "Agent ID: 1234 | Version: 3.1 | Host: " + System.getenv("HOSTNAME");
 					    }
+		   @GetMapping("/version")
+		       public String version() {
+			               return "RMM Agent Version: 3.1 has been created by feature branch";
+				           }
 }
